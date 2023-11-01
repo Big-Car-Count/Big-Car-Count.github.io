@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Description" content="A survey of the vehicles of the UK">
+  
+  <title>The Big Car Count</title>
+  <!-- PWA support -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/images/icon_192.png">
+  <meta name="apple-mobile-web-app-status-bar" content="#007dc7">
+  <meta name="theme-color" content="#007dc7">
+  <script src="/app.js" defer></script>
+  
+  <!-- Set Up Maplibre -->
+  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  
+  
+  <link href="/css/main.css" rel="stylesheet" />
+  <!-- Set Up Icon -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+</head>
+<body style="overflow:hidden">
+
+<h1>The Big Car Count <image src="/images/icon_192.png" style="height:40px; width:40px;" alt="logo"></image></h1>
+
+
+  
+<div class="inst">
+<p>Enter a number plate</p>
+</div>
+<div class="center">
+<input type="text" id="nplate" name="nplate" oninput="transformInput()" aria-label="Vehicle number plate"><br>
+</div>
+<div class="inst">
+<p>Where is this vehicle parked?</p>
+</div>
+<div class ="buttonrow">
+<button onclick="submit('drive')" class="image-button button-drive" aria-label="drive or garage"></button>
+<button onclick="submit('road')" class="image-button button-road" aria-label="road"></button>
+<button onclick="submit('pavement')" class="image-button button-pavement" aria-label="pavement"></button>
+</div>
+<div class ="lablerow">
+<p>Drive/Garage</p>
+<p>Road</p>
+<p>Pavement</p>
+</div>
+
+<div class ="buttonrow">
+<button onclick="submit('carpark')" class="image-button button-carpark" aria-label="car park"></button>
+<button onclick="submit('other')" class="image-button button-other" aria-label="other"></button>
+<button onclick="submit('notparked')" class="image-button button-notparked" aria-label="not parked"></button>
+</div>
+<div class ="lablerow">
+<p>Car Park</p>
+<p>Other</p>
+<p>Not Parked</p>
+</div>
+
+<div class="mapbox">
+<div class="inst">
+<p>Current Location</p>
+</div>
+<div id="map" class="map" style='width: 100%; height: 100px;'></div>
+</div>
+
+<div class = "menu">
+  <p><a href="/">Survey</a></p>
+  <p><a href="/about">About</a></p>
+</div>
+
+
+<script src="/js/map.js"></script>
+
+</body>
+</html>
