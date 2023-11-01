@@ -1,8 +1,8 @@
 const map = new maplibregl.Map({
   container: 'map', 
   style: 'https://www.carbon.place/pmtiles/style_pbcc_mb.json',
-  center: [0, 52], 
-  zoom: 6,
+  center: [0, 0], 
+  zoom: 1,
   maxZoom: 13,
   minZoom: 6,
   attributionControl: false,
@@ -75,6 +75,18 @@ function submit(buttonname){
     "&entry.1183165873=" + longitude
     
   console.log(query_url);
-  return(query_url)
   
+  changeIframeSrc('form', query_url);
+  
+  
+}
+
+
+function changeIframeSrc(id, url) {
+    var iframe = document.getElementById(id);
+    if(iframe) {
+        iframe.src = url;
+    } else {
+        console.log("No iframe found with id: " + id);
+    }
 }
