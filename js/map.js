@@ -155,8 +155,8 @@ function submitGET(buttonname){
   // Get the location and build the query
   getLocation().then(function(coords) {
     
-    var latitude = Number(coords[0].toFixed(6));
-    var longitude = Number(coords[1].toFixed(6));
+    var latitude = Number(coords[0].toFixed(8));
+    var longitude = Number(coords[1].toFixed(8));
     
     loc.innerHTML="" + latitude + 
     "," + longitude;
