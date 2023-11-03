@@ -22,9 +22,46 @@ var geolocate = new maplibregl.GeolocateControl({
 
 map.addControl(geolocate);
 
-map.on('load', function() {
-    geolocate.trigger();
-});
+var iframe = document.getElementById('form');
+let firstload = true
+iframe.onload = function(firstload) {
+    
+    //var url = iframe.contentWindow.location.href;
+    //console.log(url)
+    if(!firstload){
+    //if(url != "about:blank"){
+      flash_tick();
+      document.getElementById("nplate").value = ""
+      
+      // Increment the count
+      var count = Number(getCookie("BCC_count")) + 1
+      setCookie("BCC_count", count)
+    }
+    
+}
+
+function changeIframeSrc(id, url) {
+    var iframe = document.getElementById(id);
+    if(iframe) {
+        iframe.src = url;
+    } else {
+        console.log("No iframe found with id: " + id);
+    }
+}
+
+
+iframe.onerror = function() {
+    alert('Failed to submit, please check your internet connection and try again');
+}
+
+function flash_tick(){
+  var div = document.getElementById('success');
+  div.style.display = 'block';
+  setTimeout(function() {
+      div.style.display = 'none';
+  }, 1000);
+
+}
 
 function transformInput() {
   var inputElement = document.getElementById('nplate');
@@ -80,7 +117,7 @@ function submit(buttonname){
     "&entry.1424032430=" + latitude +
     "&entry.1183165873=" + longitude
     
-  console.log(query_url);
+  //console.log(query_url);
   
   changeIframeSrc('form', query_url);
   
@@ -88,48 +125,13 @@ function submit(buttonname){
     alert('For this survey please only record parked vehicles');
   }
   
+  firstload = false
   
 }
 
-
-function changeIframeSrc(id, url) {
-    var iframe = document.getElementById(id);
-    if(iframe) {
-        iframe.src = url;
-    } else {
-        console.log("No iframe found with id: " + id);
-    }
-}
-
-
-var iframe = document.getElementById('form');
-iframe.onload = function() {
-    
-    var url = iframe.contentWindow.location.href;
-    console.log(url)
-    if(url != "about:blank"){
-      flash_tick();
-      document.getElementById("nplate").value = ""
-      
-      // Increment the count
-      var count = Number(getCookie("BCC_count")) + 1
-      setCookie("BCC_count", count)
-    }
-    
-}
-
-iframe.onerror = function() {
-    alert('Failed to submit, please check your internet connection and try again');
-}
-
-function flash_tick(){
-  var div = document.getElementById('success');
-  div.style.display = 'block';
-  setTimeout(function() {
-      div.style.display = 'none';
-  }, 1000);
-
-}
-
+map.on('load', function() {
+    console.log("Geolocating")
+    geolocate.trigger();
+});
 
 
