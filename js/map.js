@@ -1,3 +1,4 @@
+/*
 const map = new maplibregl.Map({
   container: 'map', 
   style: '/style.json',
@@ -22,44 +23,23 @@ var geolocate = new maplibregl.GeolocateControl({
 
 map.addControl(geolocate);
 
-var iframe = document.getElementById('form');
-let firstload = true
-iframe.onload = function() {
-    
-    //var url = iframe.contentWindow.location.href;
-    
-    if(firstload != true){
-    //if(url != "about:blank"){
-      console.log("Flashing the tick");
-      flash_tick();
-      document.getElementById("nplate").value = ""
-      
-      // Increment the count
-      var count = Number(getCookie("BCC_count")) + 1
-      setCookie("BCC_count", count)
-    } else {
-      console.log("Iframe load rejected");
-    }
-    
-}
-
-function changeIframeSrc(id, url) {
-    var iframe = document.getElementById(id);
-    if(iframe) {
-        iframe.src = url;
-    } else {
-        console.log("No iframe found with id: " + id);
-    }
-}
-
-
-iframe.onerror = function() {
-    alert('Failed to submit, please check your internet connection and try again');
-}
+map.on('load', function() {
+    console.log("Geolocating")
+    geolocate.trigger();
+});
+*/
 
 function flash_tick(){
   var div = document.getElementById('success');
   div.style.display = 'block';
+  
+  document.getElementById("nplate").value = ""
+  
+  // Increment the count
+  var count = Number(getCookie("BCC_count")) + 1
+  setCookie("BCC_count", count)
+  
+  
   setTimeout(function() {
       div.style.display = 'none';
   }, 1000);
@@ -80,10 +60,72 @@ function transformInput() {
   inputElement.value = cleanedValue;
 }
 
-function submit(buttonname){
-  console.log("Building URL");
+var loc = document.getElementById("location");
+
+/*
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            // Success function
+            showPosition, 
+            // Error function
+            null, 
+            // Options. See MDN for details.
+            {
+               enableHighAccuracy: true,
+               timeout: 5000,
+               maximumAge: 0
+            });
+    } else { 
+        loc.innerHTML = "Your device does not support Geolocation";
+        alert("Your device does not support Geolocation")
+    }
+    
+    
+}
+
+function showPosition(position) {
+    loc.innerHTML="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+    return[position.coords.latitude, position.coords.longitude];
   
-  var base_url = "https://docs.google.com/forms/d/e/1FAIpQLSe_VBZqPVv6FWFPHjwUvc5gkXcPGanFaTbgGvMPF57ev6N4ww/formResponse?&submit=Submit?usp=pp_url"
+}
+*/
+
+function getLocation() {
+    return new Promise(function(resolve, reject) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                // Success function
+                function(position) {
+                    resolve([position.coords.latitude, position.coords.longitude]);
+                }, 
+                // Error function
+                function(error) {
+                    reject(error);
+                }, 
+                // Options
+                {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                }
+            );
+        } else { 
+            reject(new Error("Your device does not support Geolocation"));
+        }
+    });
+}
+
+
+
+
+
+function submitGET(buttonname){
+  console.log("Making GET request");
+  
+  var base_url = "https://script.google.com/macros/s/AKfycbzFM5RbJhfMp4" + 
+  "d3SvRtH-9RpHiHWtMrft8Rl0OBUCWpt1ypBbsAQXvN8rPNlciW8tCD/exec";
   
   var nplate = document.getElementById("nplate").value;
   var numChars = nplate.length;
@@ -98,6 +140,60 @@ function submit(buttonname){
     return;
   }
   
+  setupCookies();
+  var did = getCookie("BCC_id");
+  var currentDateTime = new Date().toString();
+  
+  // Get the location and build the query
+  getLocation().then(function(coords) {
+    
+    var latitude = Number(coords[0].toFixed(6));
+    var longitude = Number(coords[1].toFixed(6));
+    
+    loc.innerHTML="" + latitude + 
+    "," + longitude;
+    
+    var query_url = base_url +
+      "?plate=" + nplate +
+      "&time=" + currentDateTime +
+      "&parking_type=" + buttonname +
+      "&latitude=" + latitude +
+      "&longitude=" + longitude +
+      "&did=" + did;
+    
+    fetch(query_url, {
+        redirect: "follow",
+        method: "GET",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json(); // Parse the JSON response
+    })
+    .then(data => {
+      flash_tick(); // Flash the tick and clear the form
+    })
+    .catch(error => {
+      console.error('Error:', error); // Log any errors
+      alert('An error occurred: ' + error.message); // Show an alert
+    });
+    
+  }).catch(function(error) {
+      console.log(error);
+  });
+  
+  /*
+  
+  
+  
+  
+  var coords = getLocation();
+  console.log(coords[0])
+  
   var center = map.getCenter();
   var longitude = center.lng;
   var latitude = center.lat;
@@ -107,34 +203,25 @@ function submit(buttonname){
     return;
   }
   
-  setupCookies();
-  var did = getCookie("BCC_id");
+  */
   
-  var currentDateTime = new Date().toString();
   
-  var query_url = base_url +
-    "&entry.1136561321=" + did +
-    "&entry.48816149=" + nplate +
-    "&entry.139692408=" + currentDateTime +
-    "&entry.1482559351=" + buttonname +
-    "&entry.1424032430=" + latitude +
-    "&entry.1183165873=" + longitude
-    
-  //console.log(query_url);
-  
-  changeIframeSrc('form', query_url);
   
   if(buttonname == "notparked"){
     alert('For this survey please only record parked vehicles');
   }
   
-  firstload = false
-  
 }
 
-map.on('load', function() {
-    console.log("Geolocating")
-    geolocate.trigger();
-});
 
-
+getLocation().then(function(coords) {
+    
+    var latitude = Number(coords[0].toFixed(6));
+    var longitude = Number(coords[1].toFixed(6));
+    
+    loc.innerHTML="" + latitude + 
+    "," + longitude;
+    
+  }).catch(function(error) {
+      console.log(error);
+  });

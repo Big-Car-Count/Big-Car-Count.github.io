@@ -7,16 +7,16 @@
   <meta name="Description" content="A survey of the vehicles of the UK">
   
   <title>The Big Car Count</title>
-  <!-- PWA support -->
+  <!-- PWA support 
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="apple-touch-icon" href="/images/icon_192.png">
   <meta name="apple-mobile-web-app-status-bar" content="#007dc7">
   <meta name="theme-color" content="#007dc7">
-  <script src="/app.js" defer></script>
+  <script src="/app.js" defer></script> -->
   
-  <!-- Set Up Maplibre -->
+  <!-- Set Up Maplibre
   <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
-  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />  -->
   <script src="/js/main.js"></script>
   
   <link href="/css/main.css" rel="stylesheet" />
@@ -39,9 +39,9 @@
 <p>Where is this vehicle parked?</p>
 </div>
 <div class ="buttonrow">
-<button onclick="submit('drive')" class="image-button button-drive" aria-label="drive or garage"></button>
-<button onclick="submit('road')" class="image-button button-road" aria-label="road"></button>
-<button onclick="submit('pavement')" class="image-button button-pavement" aria-label="pavement"></button>
+<button onclick="submitGET('drive')" class="image-button button-drive" aria-label="drive or garage"></button>
+<button onclick="submitGET('road')" class="image-button button-road" aria-label="road"></button>
+<button onclick="submitGET('pavement')" class="image-button button-pavement" aria-label="pavement"></button>
 </div>
 <div class ="lablerow">
 <p>Drive/Garage</p>
@@ -50,9 +50,9 @@
 </div>
 
 <div class ="buttonrow">
-<button onclick="submit('carpark')" class="image-button button-carpark" aria-label="car park"></button>
-<button onclick="submit('other')" class="image-button button-other" aria-label="other"></button>
-<button onclick="submit('notparked')" class="image-button button-notparked" aria-label="not parked"></button>
+<button onclick="submitGET('carpark')" class="image-button button-carpark" aria-label="car park"></button>
+<button onclick="submitGET('other')" class="image-button button-other" aria-label="other"></button>
+<button onclick="submitGET('notparked')" class="image-button button-notparked" aria-label="not parked"></button>
 </div>
 <div class ="lablerow">
 <p>Car Park</p>
@@ -60,13 +60,11 @@
 <p>Not Parked</p>
 </div>
 
-<iframe id="form" style = "visibility: hidden;"></iframe>
-
 <div class="mapbox">
 <div class="inst">
 <p>Current Location</p>
+<p id="location">Can't find your current location</p>
 </div>
-<div id="map" class="map" style='width: 100%; height: 100px;'></div>
 </div>
 <script src="/js/map.js"></script>
 
