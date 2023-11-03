@@ -1,6 +1,6 @@
 const map = new maplibregl.Map({
   container: 'map', 
-  style: 'https://www.carbon.place/pmtiles/style_pbcc_mb.json',
+  style: '/style.json',
   center: [0, 0], 
   zoom: 1,
   maxZoom: 13,
@@ -67,9 +67,15 @@ function submit(buttonname){
     return;
   }
   
+  setupCookies();
+  var did = getCookie("BCC_id");
+  
+  var currentDateTime = new Date().toString();
+  
   var query_url = base_url +
+    "&entry.1136561321=" + did +
     "&entry.48816149=" + nplate +
-    "&entry.139692408=" + 12345 +
+    "&entry.139692408=" + currentDateTime +
     "&entry.1482559351=" + buttonname +
     "&entry.1424032430=" + latitude +
     "&entry.1183165873=" + longitude
@@ -77,6 +83,10 @@ function submit(buttonname){
   console.log(query_url);
   
   changeIframeSrc('form', query_url);
+  
+  if(buttonname == "notparked"){
+    alert('For this survey please only record parked vehicles');
+  }
   
   
 }
@@ -90,3 +100,36 @@ function changeIframeSrc(id, url) {
         console.log("No iframe found with id: " + id);
     }
 }
+
+
+var iframe = document.getElementById('form');
+iframe.onload = function() {
+    
+    var url = iframe.contentWindow.location.href;
+    console.log(url)
+    if(url != "about:blank"){
+      flash_tick();
+      document.getElementById("nplate").value = ""
+      
+      // Increment the count
+      var count = Number(getCookie("BCC_count")) + 1
+      setCookie("BCC_count", count)
+    }
+    
+}
+
+iframe.onerror = function() {
+    alert('Failed to submit, please check your internet connection and try again');
+}
+
+function flash_tick(){
+  var div = document.getElementById('success');
+  div.style.display = 'block';
+  setTimeout(function() {
+      div.style.display = 'none';
+  }, 1000);
+
+}
+
+
+

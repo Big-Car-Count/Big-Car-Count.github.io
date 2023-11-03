@@ -14,11 +14,7 @@
   <meta name="theme-color" content="#007dc7">
   <script src="/app.js" defer></script>
   
-  <!-- Set Up Maplibre -->
-  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
-  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
-  
-  
+
   <link href="/css/main.css" rel="stylesheet" />
   <!-- Set Up Icon -->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -27,60 +23,67 @@
 </head>
 <body>
   
-<div style="height:calc(100% - 50px); overflow:auto">
+<div class="content">
 
 <h1>The Big Car Count <image src="/images/icon_192.png" style="height:40px; width:40px;" alt="logo"></image></h1>
 
-<p>This app is part of the Connecting Administrative vehicle data for Research on Sustainable Transport (CARS) research project.</p>
+<p>This app is part of the <a href="https://environment.leeds.ac.uk/dir-record/research-projects/1794/cars-connecting-administrative-vehicle-data-for-research-on-sustainable-transport">Connecting Administrative vehicle data for Research on Sustainable Transport</a> (CARS) research project.</p>
 
-
-<p>https://environment.leeds.ac.uk/dir-record/research-projects/1794/cars-connecting-administrative-vehicle-data-for-research-on-sustainable-transport</p>
- 
 
 <p>The project aims to understand how vehicles are used in the UK and provide better evidence to address a range of issues such as air pollution, congestion, climate change and more.</p>
 
 
-<p>While we know much about vehicles in the UK a crucial missing piece of information is where the “live”. This app is intended to help build a crowd sourced survey of the home locations of vehicles across the UK. Knowing a vehicles home locations enable a wide range of research for the public good.</p>
+<p>While we know much about vehicles in the UK a crucial missing piece of information is where the "live".  Frustratingly, this is information the DVLA has and regularly sells to private companies such as parking enforcers and bailiffs but will not share with Universities or other government departments </p>
+
+<p>This app is intended to help build a crowd-sourced survey of the home locations of vehicles across the UK.  Knowing a vehicle's home location enables a wide range of research for the public good.</p>
 
 
 <h2>How to use this app.</h2>
 
-<p>Simply type in the number plate of any parked vehicles you see an click the button that best describes where it is park (e.g. on the road). If you observation has been successful the button will briefly turn into a green tick.</p>
+<p> Type in the number plate of any parked vehicles you see and click the button that best describes where it is parked (e.g. on the road).  If your observation has been successfully summited, a green tick will flash up.</p>
 
 
 <h2>What are we looking for</h2>
 
-<p>Vehicles parked in their home locations, the place they go home to a night. So spotting cars on a Sunday afternoon on a residential streets is useful. Spotting cars in a supermarket car park is not useful.</p>
+<p>Vehicles parked in their home locations, the place they go home to at night.  So, spotting cars on a Sunday afternoon on residential streets is useful.  Spotting cars in a supermarket car park is not useful.</p>
+
+<ul>
+ <li>Parked cars/motorbikes/vans</li>
+ <li>In a "home" location, e.g. drive, residential street, residential car park</li>
+</ul>
 
 
 <h2>What are we not looking for</h2>
 
-<p>Vehicles moving on the roads</p>
-
-<p>Vehicles visiting shops/offices etc.</p>
-
-<p>Delivery vans/taxis/ambulance or any other vehicle that is only temporally in its current location.</p>
+<ul>
+ <li>Moving vehicles or vehicles that have temporally stopped (e.g. at traffic lights)</li>
+ <li>Vehicles parked in temporary locations, e.g. supermarket car park, office car park</li>
+ <li>Busses/Coaches/Trucks/Diggers</li>
+ <li>Service vehicles e.g. police cars/ambulances</li>
+ <li>Taxis</li>
+</ul>
 
 
 <h2>Rules and advice for using this app</h2>
-<p>1)	Stay safe. Stay on the pavement away from moving vehicles, don’t go to places that you don’t know.</p>
 
-<p>2)	Respect others. If somebody also you not to enter their number plate, respect their wishes. Don’t trespass on private property.</p>
-
+<ul>
+ <li>Stay safe.  Stay on the pavement away from moving vehicles, and don't go to places that you don't know.</li>
+ <li>Respect others.  If somebody also you not to enter their number plate, respect their wishes. Don't trespass on private property</li>
+</ul>
 
 <h2>How do you use the data collected.</h2>
 
-<p>We will match the number plate to know characteristics of the vehicle (e.g. make/model/engine size/emissions/age). We do NOT match the vehicle to any personal information about the owner of driver.</p>
+<p>We will match the number plate to known characteristics of the vehicle (e.g. make/model/engine size/emissions/age).  We do NOT match the vehicle to any personal information about the owner or driver.</p>
  
-<p>We use the GPS location of your phone at the time the number plat is observed to identify which neighbourhood the vehicle is parked in.
-We can then use the data to produce aggregated statistics such as the average vehicle or mileage in different neighbourhoods.  The individual observations will not be published and will be deleted at the end of the research project.</p>
+<p>We use the GPS location of your phone at the time the number plate is observed to identify which neighbourhood the vehicle is parked in.
+We can then use the data to produce aggregated statistics such as the average vehicle age or mileage in different neighbourhoods.  The individual observations will not be published and will be deleted at the end of the research project.</p>
 
 
 </div>  
 
 <div class = "menu">
   <p><a href="/">Survey</a></p>
-  <p><a href="/about">About</a></p>
+  <p><a href="/stats">Stats</a></p>
 </div>
 
 
