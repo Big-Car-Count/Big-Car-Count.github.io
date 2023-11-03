@@ -30,6 +30,10 @@ map.on('load', function() {
 */
 
 function flash_tick(){
+  
+  var div2 = document.getElementById('loading');
+  div2.style.display = 'none';
+  
   var div = document.getElementById('success');
   div.style.display = 'block';
   
@@ -122,6 +126,10 @@ function getLocation() {
 
 
 function submitGET(buttonname){
+  
+  var div = document.getElementById('loading');
+  div.style.display = 'block';
+  
   console.log("Making GET request");
   
   var base_url = "https://script.google.com/macros/s/AKfycbzFM5RbJhfMp4" + 
@@ -179,11 +187,16 @@ function submitGET(buttonname){
     })
     .catch(error => {
       console.error('Error:', error); // Log any errors
+      var div2 = document.getElementById('loading');
+      div2.style.display = 'none';
       alert('An error occurred: ' + error.message); // Show an alert
     });
     
   }).catch(function(error) {
       console.log(error);
+      var div2 = document.getElementById('loading');
+      div2.style.display = 'none';
+      alert("Can't find your location, please check that location is enabled.")
   });
   
   /*
@@ -212,16 +225,3 @@ function submitGET(buttonname){
   }
   
 }
-
-
-getLocation().then(function(coords) {
-    
-    var latitude = Number(coords[0].toFixed(6));
-    var longitude = Number(coords[1].toFixed(6));
-    
-    loc.innerHTML="" + latitude + 
-    "," + longitude;
-    
-  }).catch(function(error) {
-      console.log(error);
-  });
