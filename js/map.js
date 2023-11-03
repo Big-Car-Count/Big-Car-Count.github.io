@@ -24,11 +24,11 @@ map.addControl(geolocate);
 
 var iframe = document.getElementById('form');
 let firstload = true
-iframe.onload = function(firstload) {
+iframe.onload = function() {
     
     //var url = iframe.contentWindow.location.href;
-    //console.log(url)
-    if(!firstload){
+    console.log(firstload)
+    if(firstload != true){
     //if(url != "about:blank"){
       flash_tick();
       document.getElementById("nplate").value = ""
