@@ -27,15 +27,18 @@ let firstload = true
 iframe.onload = function() {
     
     //var url = iframe.contentWindow.location.href;
-    console.log(firstload)
+    
     if(firstload != true){
     //if(url != "about:blank"){
+      console.log("Flashing the tick");
       flash_tick();
       document.getElementById("nplate").value = ""
       
       // Increment the count
       var count = Number(getCookie("BCC_count")) + 1
       setCookie("BCC_count", count)
+    } else {
+      console.log("Iframe load rejected");
     }
     
 }
