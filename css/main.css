@@ -60,6 +60,14 @@ body, html {
   padding: 0px 5px 0px 5px;
 }
 
+.lablerow p{
+  margin-top: 3px;
+  margin-bottom: 6px;
+}
+
+.mainbox{
+  min-height: 500;
+}
 
 
 #nplate{
@@ -94,19 +102,41 @@ h1 {
   font-size: 30px;
 }
 
-.menu {
+.overflowbox {
   position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+
+@media screen and (max-height: 500px) {
+  .overflowbox {
+    position: absolute;
+    top: 550px;
+  }
+  body, html {
+    overflow: scroll;
+  }
+}
+
+
+.menu {
+  /* position: fixed; */
   bottom: 0;
   left: 0;
   height: 40px;
   width: 100%;
   text-align: center;
+  background-color: #070ca6;
 }
 
 .menu p {
   display: inline;
   margin-right: 50px; /* adjust as needed */
   font-size: 30px;
+  padding-left: 10px;
+  text-align: center;
 }
 
 .menu p a {
@@ -115,7 +145,7 @@ h1 {
 }
 
 .mapbox {
-  position: fixed;
+  /* position: fixed; */
   bottom: 50px;
   left: 0px;
   width: 100%;
@@ -132,6 +162,6 @@ h1 {
 
 .content {
   height: calc(100% - 60px);
-  padding: 5px;
+  padding: 3px;
   overflow:auto
 }

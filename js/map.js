@@ -96,6 +96,29 @@ function showPosition(position) {
 }
 */
 
+
+let coords = { latitude: null, longitude: null };
+
+function updateCoords() {
+  console.log("Watching Location")
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition((position) => {
+      coords.latitude = position.coords.latitude;
+      coords.longitude = position.coords.longitude;
+      loc.innerHTML="" + coords.latitude + "," + coords.longitude;
+      //console.log(coords);
+    });
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+updateCoords();
+
+
+
+/*
+
 function getLocation() {
     return new Promise(function(resolve, reject) {
         if (navigator.geolocation) {
@@ -121,7 +144,7 @@ function getLocation() {
     });
 }
 
-
+*/
 
 
 
@@ -144,7 +167,7 @@ function submitGET(buttonname){
   }
   
   if(numChars > 9){
-    alert("Number plate too long")
+    alert("Number plate too long");
     return;
   }
   
@@ -152,45 +175,65 @@ function submitGET(buttonname){
   var did = getCookie("BCC_id");
   var currentDateTime = new Date().toString();
   
-  // Get the location and build the query
-  getLocation().then(function(coords) {
-    
-    var latitude = Number(coords[0].toFixed(8));
-    var longitude = Number(coords[1].toFixed(8));
-    
-    loc.innerHTML="" + latitude + 
-    "," + longitude;
-    
-    var query_url = base_url +
+  var lng = coords.longitude;
+  var lat = coords.latitude;
+  
+  if(lng === null){
+    alert("Your are not sharing your location");
+    div.style.display = 'none';
+    return;
+  }
+  
+  lng = lng.toFixed(8);
+  lat = lat.toFixed(8);
+  
+  if(lng > 5 || lng < - 5 || lat > 65 || lat < 49){
+    alert("Your are not in the UK or are not sharing your location");
+    div.style.display = 'none';
+    return;
+  }
+  
+  
+  
+  // Submit query
+  
+  var query_url = base_url +
       "?plate=" + nplate +
       "&time=" + currentDateTime +
       "&parking_type=" + buttonname +
-      "&latitude=" + latitude +
-      "&longitude=" + longitude +
+      "&latitude=" + lat +
+      "&longitude=" + lng +
       "&did=" + did;
     
-    fetch(query_url, {
-        redirect: "follow",
-        method: "GET",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+  fetch(query_url, {
+      redirect: "follow",
+      method: "GET",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
       }
-      return response.json(); // Parse the JSON response
-    })
-    .then(data => {
-      flash_tick(); // Flash the tick and clear the form
-    })
-    .catch(error => {
-      console.error('Error:', error); // Log any errors
-      var div2 = document.getElementById('loading');
-      div2.style.display = 'none';
-      alert('An error occurred: ' + error.message); // Show an alert
-    });
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // Parse the JSON response
+  })
+  .then(data => {
+    flash_tick(); // Flash the tick and clear the form
+  })
+  .catch(error => {
+    console.error('Error:', error); // Log any errors
+    var div2 = document.getElementById('loading');
+    div2.style.display = 'none';
+    alert('An error occurred: ' + error.message); // Show an alert
+  });
+  
+  
+  /*
+  // Get the location and build the query
+  getLocation().then(function(coords) {
+    
+    
     
   }).catch(function(error) {
       console.log(error);
