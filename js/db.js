@@ -91,6 +91,7 @@ function submitPlate(buttonname){
 function sendRequest(data, key){
 
   console.log("Sending " + key + " " + data.nplate);
+  uploading = true;
   
   var base_url = "https://script.google.com/macros/s/AKfycbzFM5RbJhfMp4" + 
   "d3SvRtH-9RpHiHWtMrft8Rl0OBUCWpt1ypBbsAQXvN8rPNlciW8tCD/exec";
@@ -119,12 +120,12 @@ function sendRequest(data, key){
   })
   .then(data => {
     if(data.result == "success"){
-      deleteFormData(key)
+      deleteFormData(key);
     } else {
       console.log("Failed to submit ");
       console.log(data);
     }
-
+    uploading = false;
   })
   .catch(error => {
     console.error('Error:', error); // Log any errors
@@ -144,7 +145,13 @@ function deleteFormData(id) {
   };
 }
 
+let uploading = false;
+
 function checkDatabase() {
+  if(uploading) {
+    console.log("Skipping check");
+    return
+  }
   
   var div1 = document.getElementById('nointernet');
   var div2 = document.getElementById('loading');
@@ -175,8 +182,8 @@ function checkDatabase() {
   
 }
 
-// Check the database every 5 seconds
-setInterval(checkDatabase, 5000);
+// Check the database every 3 seconds
+setInterval(checkDatabase, 3000);
 
 
 
