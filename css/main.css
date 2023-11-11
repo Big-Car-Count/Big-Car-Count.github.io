@@ -181,3 +181,8 @@ h1 {
   padding: 3px;
   overflow:auto
 }
+
+/* Stars */
+.progress-bar{
+  background-color: yellow;
+}

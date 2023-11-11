@@ -16,6 +16,7 @@
   
   <script src="/js/main.js"></script>
   
+  
   <link href="/css/main.css" rel="stylesheet" />
   <!-- Set Up Icon -->
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -28,15 +29,24 @@
 
 <h1>The Big Car Count <image src="/images/icon_40.jpg" style="height:40px; width:40px;" alt="logo"></image></h1>
 
-<p>Number of observations submitted</p>
-<p><div id="count">0</div></p>
-<p>App Version 0.008</p>
+<p>Number of observations submitted:</p><div id="count">0</div>
+<div id="stars" style="height: 40px"></div>
+<div id="stars-message"></div>
+<p>Progress to next star</p>
+<div class="progress" style="height: 30px; color:yellow;">
+    <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+<p>App Version 0.009</p>
 
 </div>
 
 <script>
   document.getElementById("count").innerHTML = getCookie("BCC_count")
 </script>
+
+
+
 
 <div class="overflowbox">
 <div class = "menu">
@@ -47,5 +57,6 @@
 
 
 
+<script src="/js/stars.js"></script>
 </body>
 </html>
