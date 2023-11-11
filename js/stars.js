@@ -20,9 +20,9 @@ function calculateStars(submissions) {
 
 function starsMessage(stars) {
     if (stars == 0) {return 'Newbie: Submit observations to earn stars'} else
-    if (stars == 1) {return 'Appentice Surveyor'} else
+    if (stars == 1) {return 'Apprentice Surveyor'} else
     if (stars == 2) {return 'Local Expert'} else
-    if (stars == 3) {return 'Neighbouhood Champion'} else
+    if (stars == 3) {return 'Neighbourhood Champion'} else
     if (stars == 4) {return 'Pro Car Spotter'} else
     if (stars == 5) {return 'Outstanding Surveyor'} else
     return 'Scientific Superstar'
