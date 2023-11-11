@@ -110,7 +110,7 @@ h1 {
 }
 
 
-@media screen and (max-height: 500px) {
+@media screen and (max-height: 550px) {
   .overflowbox {
     position: absolute;
     top: 550px;
@@ -157,6 +157,14 @@ h1 {
   display: none;
   top: 250px;
   left: calc(50% - 75px);
+  z-index: 1000;
+}
+
+.loading {
+  position: fixed;
+  display: none;
+  top: 100px;
+  right: calc(5% + 0px);
   z-index: 1000;
 }
 

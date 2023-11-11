@@ -15,6 +15,7 @@
   <script src="/app.js" defer></script>
   
   <script src="/js/main.js"></script>
+  <script src="/js/db.js"></script>
   
   <link href="/css/main.css" rel="stylesheet" />
   <!-- Set Up Icon -->
@@ -37,9 +38,9 @@
 <p>Where is this vehicle parked?</p>
 </div>
 <div class ="buttonrow">
-<button onclick="submitGET('drive')" class="image-button button-drive" aria-label="drive or garage"></button>
-<button onclick="submitGET('road')" class="image-button button-road" aria-label="road"></button>
-<button onclick="submitGET('pavement')" class="image-button button-pavement" aria-label="pavement"></button>
+<button onclick="submitPlate('drive')" class="image-button button-drive" aria-label="drive or garage"></button>
+<button onclick="submitPlate('road')" class="image-button button-road" aria-label="road"></button>
+<button onclick="submitPlate('pavement')" class="image-button button-pavement" aria-label="pavement"></button>
 </div>
 <div class ="lablerow">
 <p>Drive/Garage</p>
@@ -48,9 +49,9 @@
 </div>
 
 <div class ="buttonrow">
-<button onclick="submitGET('carpark')" class="image-button button-carpark" aria-label="car park"></button>
-<button onclick="submitGET('other')" class="image-button button-other" aria-label="other"></button>
-<button onclick="submitGET('notparked')" class="image-button button-notparked" aria-label="not parked"></button>
+<button onclick="submitPlate('carpark')" class="image-button button-carpark" aria-label="car park"></button>
+<button onclick="submitPlate('other')" class="image-button button-other" aria-label="other"></button>
+<button onclick="submitPlate('notparked')" class="image-button button-notparked" aria-label="not parked"></button>
 </div>
 <div class ="lablerow">
 <p>Car Park</p>
@@ -79,8 +80,8 @@
   <image src="/images/tick.png" style="height:150px; width:150px;" alt="Sucesffully loaded"></image>
 </div>
 
-<div class="success" id="loading">
-  <image src="/images/spinner.svg" style="height:150px; width:150px;" alt="Submitting"></image>
+<div class="loading" id="loading">
+  <image src="/images/spinner.svg" style="height:60px; width:60px;" alt="Submitting"></image>
 </div>
 
 </body>

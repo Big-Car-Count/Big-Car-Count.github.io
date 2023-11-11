@@ -1,53 +1,20 @@
-/*
-const map = new maplibregl.Map({
-  container: 'map', 
-  style: '/style.json',
-  center: [0, 0], 
-  zoom: 1,
-  maxZoom: 13,
-  minZoom: 6,
-  attributionControl: false,
-  hash: false,
-  dragPan: false,
-  dragRotate: false,
-  scrollZoom: false
-});
-
-// Add geolocate control to the map.
-var geolocate = new maplibregl.GeolocateControl({
-    positionOptions: {
-        enableHighAccuracy: true
-    },
-    trackUserLocation: true
-});
-
-map.addControl(geolocate);
-
-map.on('load', function() {
-    console.log("Geolocating")
-    geolocate.trigger();
-});
-*/
-
 function flash_tick(){
-  
-  var div2 = document.getElementById('loading');
-  div2.style.display = 'none';
   
   var div = document.getElementById('success');
   div.style.display = 'block';
   
-  document.getElementById("nplate").value = ""
+  platediv = document.getElementById("nplate")
+  platediv.value = ""
+  platediv.focus();
+  
+  setTimeout(function() {
+      div.style.display = 'none';
+  }, 500);
   
   // Increment the count
   var count = Number(getCookie("BCC_count")) + 1
   setCookie("BCC_count", count)
   
-  
-  setTimeout(function() {
-      div.style.display = 'none';
-  }, 1000);
-
 }
 
 function transformInput() {
@@ -65,38 +32,6 @@ function transformInput() {
 }
 
 var loc = document.getElementById("location");
-
-/*
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            // Success function
-            showPosition, 
-            // Error function
-            null, 
-            // Options. See MDN for details.
-            {
-               enableHighAccuracy: true,
-               timeout: 5000,
-               maximumAge: 0
-            });
-    } else { 
-        loc.innerHTML = "Your device does not support Geolocation";
-        alert("Your device does not support Geolocation")
-    }
-    
-    
-}
-
-function showPosition(position) {
-    loc.innerHTML="Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
-    return[position.coords.latitude, position.coords.longitude];
-  
-}
-*/
-
-
 let coords = { latitude: null, longitude: null };
 
 function updateCoords() {
@@ -115,39 +50,7 @@ function updateCoords() {
 
 updateCoords();
 
-
-
 /*
-
-function getLocation() {
-    return new Promise(function(resolve, reject) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                // Success function
-                function(position) {
-                    resolve([position.coords.latitude, position.coords.longitude]);
-                }, 
-                // Error function
-                function(error) {
-                    reject(error);
-                }, 
-                // Options
-                {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
-                }
-            );
-        } else { 
-            reject(new Error("Your device does not support Geolocation"));
-        }
-    });
-}
-
-*/
-
-
-
 function submitGET(buttonname){
   
   var div = document.getElementById('loading');
@@ -193,8 +96,6 @@ function submitGET(buttonname){
     return;
   }
   
-  
-  
   // Submit query
   
   var query_url = base_url +
@@ -229,6 +130,16 @@ function submitGET(buttonname){
   });
   
   
+  
+  
+  
+  if(buttonname == "notparked"){
+    alert('For this survey please only record parked vehicles');
+  }
+  
+}
+*/
+
   /*
   // Get the location and build the query
   getLocation().then(function(coords) {
@@ -260,11 +171,96 @@ function submitGET(buttonname){
   }
   
   */
-  
-  
-  
-  if(buttonname == "notparked"){
-    alert('For this survey please only record parked vehicles');
-  }
+
+/*
+const map = new maplibregl.Map({
+  container: 'map', 
+  style: '/style.json',
+  center: [0, 0], 
+  zoom: 1,
+  maxZoom: 13,
+  minZoom: 6,
+  attributionControl: false,
+  hash: false,
+  dragPan: false,
+  dragRotate: false,
+  scrollZoom: false
+});
+
+// Add geolocate control to the map.
+var geolocate = new maplibregl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true
+});
+
+map.addControl(geolocate);
+
+map.on('load', function() {
+    console.log("Geolocating")
+    geolocate.trigger();
+});
+*/
+
+
+
+/*
+
+function getLocation() {
+    return new Promise(function(resolve, reject) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                // Success function
+                function(position) {
+                    resolve([position.coords.latitude, position.coords.longitude]);
+                }, 
+                // Error function
+                function(error) {
+                    reject(error);
+                }, 
+                // Options
+                {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                }
+            );
+        } else { 
+            reject(new Error("Your device does not support Geolocation"));
+        }
+    });
+}
+
+*/
+
+
+/*
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            // Success function
+            showPosition, 
+            // Error function
+            null, 
+            // Options. See MDN for details.
+            {
+               enableHighAccuracy: true,
+               timeout: 5000,
+               maximumAge: 0
+            });
+    } else { 
+        loc.innerHTML = "Your device does not support Geolocation";
+        alert("Your device does not support Geolocation")
+    }
+    
+    
+}
+
+function showPosition(position) {
+    loc.innerHTML="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+    return[position.coords.latitude, position.coords.longitude];
   
 }
+*/

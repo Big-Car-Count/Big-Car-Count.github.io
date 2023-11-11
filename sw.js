@@ -1,6 +1,14 @@
 const staticCacheName = 'site-static-v2';
 const assets = [
   '/images/icon_192.png',
+  '/images/carpark.jpg',
+  '/images/icon_40.jpg',
+  '/images/notparked.jpg',
+  '/images/other.jpg',
+  '/images/pavement.jpg',
+  '/images/road.jpg',
+  '/images/spinner.svg',
+  '/images/tick.png',
 ];
 
 // install event
