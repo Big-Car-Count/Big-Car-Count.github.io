@@ -129,6 +129,7 @@ function sendRequest(data, key){
   })
   .catch(error => {
     console.error('Error:', error); // Log any errors
+    uploading = false;
   });
 }
 

@@ -38,8 +38,8 @@ function updateCoords() {
   console.log("Watching Location")
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition((position) => {
-      coords.latitude = position.coords.latitude;
-      coords.longitude = position.coords.longitude;
+      coords.latitude = position.coords.latitude.toFixed(8);
+      coords.longitude = position.coords.longitude.toFixed(8);
       loc.innerHTML="" + coords.latitude + "," + coords.longitude;
       //console.log(coords);
     });
