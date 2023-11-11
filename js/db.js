@@ -68,7 +68,6 @@ function submitPlate(buttonname){
   
   if(lng === null){
     alert("Your are not sharing your location");
-    //div.style.display = 'none';
     return;
   }
   
@@ -77,7 +76,6 @@ function submitPlate(buttonname){
   
   if(lng > 5 || lng < - 5 || lat > 65 || lat < 49){
     alert("Your are not in the UK or are not sharing your location");
-    //div.style.display = 'none';
     return;
   }
   
@@ -90,11 +88,8 @@ function submitPlate(buttonname){
   
 }
 
-
-//I've change my SendRequest fucntion to this, can you add the Promise to this function
 function sendRequest(data, key){
-  var div2 = document.getElementById('loading');
-  div2.style.display = 'block';
+
   console.log("Sending " + key + " " + data.nplate);
   
   var base_url = "https://script.google.com/macros/s/AKfycbzFM5RbJhfMp4" + 
@@ -123,23 +118,16 @@ function sendRequest(data, key){
     return response.json(); // Parse the JSON response
   })
   .then(data => {
-    //console.log(data);
     if(data.result == "success"){
       deleteFormData(key)
-      div2.style.display = 'none';
     } else {
       console.log("Failed to submit ");
       console.log(data);
-      div2.style.display = 'none';
     }
-    
-    //flash_tick(); // Flash the tick and clear the form
-    
+
   })
   .catch(error => {
     console.error('Error:', error); // Log any errors
-    div2.style.display = 'none';
-    //alert('An error occurred: ' + error.message); // Show an alert
   });
 }
 
@@ -156,8 +144,10 @@ function deleteFormData(id) {
   };
 }
 
-
 function checkDatabase() {
+  
+  var div2 = document.getElementById('loading');
+  
   
   if (navigator.onLine) {
     let transaction = db.transaction(['formData'], 'readonly');
@@ -169,8 +159,11 @@ function checkDatabase() {
     request.onsuccess = function(event) {
       let cursor = event.target.result;
       if (cursor) {
+        div2.style.display = 'block';
         sendRequest(cursor.value, cursor.key)
-      } 
+      } else {
+        div2.style.display = 'none';
+      }
     };
     
   } else {
