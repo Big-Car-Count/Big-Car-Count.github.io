@@ -155,8 +155,8 @@ h1 {
 .success {
   position: fixed;
   display: none;
-  top: 250px;
-  left: calc(50% - 75px);
+  top: 105px;
+  right: calc(5% + 10px);
   z-index: 1000;
 }
 
@@ -165,6 +165,14 @@ h1 {
   display: none;
   top: 100px;
   right: calc(5% + 0px);
+  z-index: 1000;
+}
+
+.nointernet {
+  position: fixed;
+  display: none;
+  top: 110px;
+  right: calc(5% + 10px);
   z-index: 1000;
 }
 

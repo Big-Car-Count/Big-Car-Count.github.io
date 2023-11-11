@@ -146,10 +146,12 @@ function deleteFormData(id) {
 
 function checkDatabase() {
   
+  var div1 = document.getElementById('nointernet');
   var div2 = document.getElementById('loading');
   
   
   if (navigator.onLine) {
+    div1.style.display = 'none';
     let transaction = db.transaction(['formData'], 'readonly');
     let store = transaction.objectStore('formData');
   
@@ -168,6 +170,7 @@ function checkDatabase() {
     
   } else {
     console.log("No internet");
+    div1.style.display = 'block';
   }
   
 }
