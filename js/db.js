@@ -71,8 +71,8 @@ function submitPlate(buttonname){
     return;
   }
   
-  lng = lng.toFixed(8);
-  lat = lat.toFixed(8);
+  lng = Number(lng).toFixed(8);
+  lat = Number(lat).toFixed(8);
   
   if(lng > 5 || lng < - 5 || lat > 65 || lat < 49){
     alert("Your are not in the UK or are not sharing your location");
