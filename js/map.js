@@ -17,6 +17,7 @@ function flash_tick(){
   
 }
 
+// Makes numberplates upper case
 function transformInput() {
   var inputElement = document.getElementById('nplate');
   var inputValue = inputElement.value;
@@ -29,6 +30,37 @@ function transformInput() {
 
   // Update the input field
   inputElement.value = cleanedValue;
+  
+  if(validNumberPlate(cleanedValue)){
+    inputElement.style.borderColor = "green";
+  } else {
+    inputElement.style.borderColor = "red";
+  }
+}
+
+
+// Valid Number plate
+function validNumberPlate(vrm){
+  
+  if(/^[A-HJ-PR-Y][A-HJ-PR-Y][0-25-7][0-9][A-HJ-PR-Z][A-HJ-PR-Z][A-HJ-PR-Z]$/.test(vrm)){
+    console.log(vrm + " post-2001 plate");
+    return true
+  } else if (/^[A-HJ-NPR-TV-Y][0-9]{1,3}[A-HJ-PR-TV-Y][A-HJ-PR-TV-Y][A-HJ-PR-TV-Y]$/.test(vrm)){
+    console.log(vrm + " 1983 to 2001 plate");
+    return true
+  } else if (/^[A-HJ-PR-Y][A-HJ-PR-Y][A-HJ-PR-Y][0-9]{1,3}[A-HJ-NPR-TV-Y]$/.test(vrm)){
+    console.log(vrm + " 1963 to 1984 plate");
+    return true
+  } else if (/^[A-Z]{1,3}[0-9]{1,4}$/.test(vrm)){
+    console.log(vrm + " Dateless letters first plate");
+    return true
+  } else if (/^[0-9]{1,4}[A-Z]{1,3}$/.test(vrm)){
+    console.log(vrm + " Dateless numbers first plate");
+    return true
+  } else {
+    //console.log(vrm + " not valid plate");
+    return false
+  }
 }
 
 var loc = document.getElementById("location");

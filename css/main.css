@@ -79,6 +79,7 @@ body, html {
   text-align: center;
   font-size: 40px;
   border-radius: 10px;
+  border-width: 5px;
 }
 
 .center {
