@@ -52,7 +52,7 @@ function validNumberPlate(vrm){
     console.log(vrm + " 1963 to 1984 plate");
     return true
   } else if (/^[A-Z]{1,3}[0-9]{1,4}$/.test(vrm)){
-    console.log(vrm + " Dateless letters first plate");
+    console.log(vrm + " Dateless letters first or NI plate");
     return true
   } else if (/^[0-9]{1,4}[A-Z]{1,3}$/.test(vrm)){
     console.log(vrm + " Dateless numbers first plate");
