@@ -43,7 +43,7 @@ function saveData(nplate, time, button, lat, lng, did) {
 }
 
 
-function submitPlate(buttonname){
+function submitPlate_old(buttonname){
   
   console.log("Sumbitting to DB");
   
@@ -87,6 +87,45 @@ function submitPlate(buttonname){
   }
   
 }
+
+
+function submitPlate(buttonname){
+  
+  console.log("Validating Input");
+  
+  var nplate = document.getElementById("nplate").value;
+  var check = validNumberPlate(nplate);
+  
+  if(check){
+    var did = getCookie("BCC_id");
+    var currentDateTime = new Date().toString();
+    
+    var lng = coords.longitude;
+    var lat = coords.latitude;
+    
+    lng = Number(lng).toFixed(8);
+    lat = Number(lat).toFixed(8);
+    
+    if(lng > 5 || lng < - 5 || lat > 65 || lat < 49){
+      alert("Your are not in the UK or are not sharing your location");
+      return;
+    }
+    
+    saveData(nplate, currentDateTime, buttonname, lat, lng, did);
+    flash_tick();
+    
+    if(buttonname == "notparked"){
+      alert('For this survey please only record parked vehicles');
+    }
+  } else {
+    var invalidplatename = document.getElementById('invalidplatename');
+    invalidplatename.innerHTML = nplate;
+    var invalidplate = document.getElementById('invalidplate');
+    invalidplate.style.display = "block";
+  }
+  
+}
+
 
 function sendRequest(data, key){
 

@@ -82,6 +82,12 @@ function updateCoords() {
 
 updateCoords();
 
+
+function closeInvalidplate() {
+  var inputElement = document.getElementById('invalidplate');
+  inputElement.style.display = "none";
+}
+
 /*
 function submitGET(buttonname){
   

@@ -63,6 +63,8 @@
 <div class="overflowbox">
 <div class="mapbox">
 <div class="inst">
+<p>By participating in this survey you consent to the</p>
+<p><a href="/about/consent">terms and conditions</a></p>
 <p><b>Current Location</b></p>
 <p id="location"><button onclick="updateCoords()" style="height: 40px"> Please share your location</button></p>
 </div>
@@ -88,6 +90,12 @@
   <image src="/images/nointernet.PNG" style="height:40px; width:40px;" alt="Submitting"></image>
 </div>
 
+<div class="invalidplate" id="invalidplate">
+  <p><b>Are you sure?</b></p>
+  <p><div id="invalidplatename">NA</div></p>
+  <p>Doesn't look like a valid UK registation plate. Please check and re-enter. Or you may have found a foreign, diplomatic, or fake plate. We are not including these in our survey.</p>
+  <p><button onclick="closeInvalidplate()" style="height: 40px">Re-enter number plate</button></p>
+</div>
 
 </body>
 </html>

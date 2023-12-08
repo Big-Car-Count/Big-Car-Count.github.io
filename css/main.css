@@ -103,6 +103,11 @@ h1 {
   font-size: 30px;
 }
 
+a {
+  color: white;
+}
+
+
 .overflowbox {
   position: fixed;
   bottom: 0px;
@@ -145,11 +150,42 @@ h1 {
   text-decoration: none;
 }
 
+.invalidplate {
+  position: fixed;
+  display: none;
+  top: 20px;
+  width: calc(100% - 36px);
+  left: 5px%;
+  background-color: white;
+  color: black;
+  padding: 8px;
+  border: solid;
+  border-color: red;
+  border-radius: 10px;
+}
+
 .mapbox {
   /* position: fixed; */
   bottom: 50px;
   left: 0px;
   width: 100%;
+}
+
+.infoimages {
+  min-height: 210px;
+}
+
+.infoimages img {
+  float: right;
+  height: 200px;
+  width:200px; 
+  width: auto;
+  padding: 10px;
+  border-radius: 10%;
+}
+
+.infoimages .text {
+  padding-top: 10px;
 }
 
 
