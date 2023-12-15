@@ -110,7 +110,7 @@ a {
 
 .overflowbox {
   position: fixed;
-  bottom: 0px;
+  bottom: 1px;
   left: 0px;
   width: 100%;
 }
