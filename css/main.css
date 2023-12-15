@@ -99,7 +99,7 @@ body, html {
 }
 
 h1 {
-  margin: 10px;
+  margin: 10px 10px 10px 0px;
   font-size: 30px;
 }
 
@@ -164,6 +164,22 @@ a {
   border-radius: 10px;
 }
 
+.firsttime {
+  position: fixed;
+  display: none;
+  top: 20px;
+  width: calc(100% - 36px);
+  left: 5px%;
+  background-color: #007dc7;
+  color: white;
+  padding: 8px;
+  border: solid;
+  border-color: white;
+  border-radius: 10px;
+  z-index: 2000;
+}
+
+
 .mapbox {
   /* position: fixed; */
   bottom: 50px;
@@ -192,7 +208,7 @@ a {
 .success {
   position: fixed;
   display: none;
-  top: 105px;
+  top: 135px;
   right: calc(5% + 10px);
   z-index: 1000;
 }
@@ -200,7 +216,7 @@ a {
 .loading {
   position: fixed;
   display: none;
-  top: 100px;
+  top: 130px;
   right: calc(5% + 0px);
   z-index: 1000;
 }
@@ -208,7 +224,7 @@ a {
 .nointernet {
   position: fixed;
   display: none;
-  top: 110px;
+  top: 140px;
   right: calc(5% + 10px);
   z-index: 1000;
 }

@@ -80,6 +80,25 @@ function updateCoords() {
   }
 }
 
+function shareCoords() {
+  console.log("Sharing Location")
+  var inputElement = document.getElementById('location');
+  inputElement.innerHTML = '<button style="height: 40px"><image src="/images/spinner.svg" style="height:30px; width:30px;" alt="Checking"></button>';
+  
+  updateCoords();
+  
+  setTimeout(function() {
+    var inputElement2 = document.getElementById('location');
+    //console.log(inputElement2.innerHTML.alt);
+    console.log(/spinner/.test(inputElement2.innerHTML));
+    if(/spinner/.test(inputElement2.innerHTML)){
+      inputElement.innerHTML = '<button onclick="shareCoords()" style="height: 40px">Failed to get location, check your device settings</button>';
+    }
+  }, 5000);
+  
+}
+
+
 updateCoords();
 
 
@@ -88,217 +107,13 @@ function closeInvalidplate() {
   inputElement.style.display = "none";
 }
 
-/*
-function submitGET(buttonname){
-  
-  var div = document.getElementById('loading');
-  div.style.display = 'block';
-  
-  console.log("Making GET request");
-  
-  var base_url = "https://script.google.com/macros/s/AKfycbzFM5RbJhfMp4" + 
-  "d3SvRtH-9RpHiHWtMrft8Rl0OBUCWpt1ypBbsAQXvN8rPNlciW8tCD/exec";
-  
-  var nplate = document.getElementById("nplate").value;
-  var numChars = nplate.length;
-  
-  if(numChars < 4){
-    alert("Number plate too short")
-    return;
+
+function closefirsttime(check) {
+  var inputElement = document.getElementById('firsttime');
+  if(check){
+    setCookie('BCC_consent','true');
+    submitPlate(firstbuttonname);
   }
-  
-  if(numChars > 9){
-    alert("Number plate too long");
-    return;
-  }
-  
-  setupCookies();
-  var did = getCookie("BCC_id");
-  var currentDateTime = new Date().toString();
-  
-  var lng = coords.longitude;
-  var lat = coords.latitude;
-  
-  if(lng === null){
-    alert("Your are not sharing your location");
-    div.style.display = 'none';
-    return;
-  }
-  
-  lng = lng.toFixed(8);
-  lat = lat.toFixed(8);
-  
-  if(lng > 5 || lng < - 5 || lat > 65 || lat < 49){
-    alert("Your are not in the UK or are not sharing your location");
-    div.style.display = 'none';
-    return;
-  }
-  
-  // Submit query
-  
-  var query_url = base_url +
-      "?plate=" + nplate +
-      "&time=" + currentDateTime +
-      "&parking_type=" + buttonname +
-      "&latitude=" + lat +
-      "&longitude=" + lng +
-      "&did=" + did;
-    
-  fetch(query_url, {
-      redirect: "follow",
-      method: "GET",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      }
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json(); // Parse the JSON response
-  })
-  .then(data => {
-    flash_tick(); // Flash the tick and clear the form
-  })
-  .catch(error => {
-    console.error('Error:', error); // Log any errors
-    var div2 = document.getElementById('loading');
-    div2.style.display = 'none';
-    alert('An error occurred: ' + error.message); // Show an alert
-  });
-  
-  
-  
-  
-  
-  if(buttonname == "notparked"){
-    alert('For this survey please only record parked vehicles');
-  }
-  
-}
-*/
-
-  /*
-  // Get the location and build the query
-  getLocation().then(function(coords) {
-    
-    
-    
-  }).catch(function(error) {
-      console.log(error);
-      var div2 = document.getElementById('loading');
-      div2.style.display = 'none';
-      alert("Can't find your location, please check that location is enabled.")
-  });
-  
-  /*
-  
-  
-  
-  
-  var coords = getLocation();
-  console.log(coords[0])
-  
-  var center = map.getCenter();
-  var longitude = center.lng;
-  var latitude = center.lat;
-  
-  if(longitude > 5 || longitude < - 5 || latitude > 65 || latitude < 49){
-    alert("Your are not in the UK or are not sharing your location")
-    return;
-  }
-  
-  */
-
-/*
-const map = new maplibregl.Map({
-  container: 'map', 
-  style: '/style.json',
-  center: [0, 0], 
-  zoom: 1,
-  maxZoom: 13,
-  minZoom: 6,
-  attributionControl: false,
-  hash: false,
-  dragPan: false,
-  dragRotate: false,
-  scrollZoom: false
-});
-
-// Add geolocate control to the map.
-var geolocate = new maplibregl.GeolocateControl({
-    positionOptions: {
-        enableHighAccuracy: true
-    },
-    trackUserLocation: true
-});
-
-map.addControl(geolocate);
-
-map.on('load', function() {
-    console.log("Geolocating")
-    geolocate.trigger();
-});
-*/
-
-
-
-/*
-
-function getLocation() {
-    return new Promise(function(resolve, reject) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                // Success function
-                function(position) {
-                    resolve([position.coords.latitude, position.coords.longitude]);
-                }, 
-                // Error function
-                function(error) {
-                    reject(error);
-                }, 
-                // Options
-                {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
-                }
-            );
-        } else { 
-            reject(new Error("Your device does not support Geolocation"));
-        }
-    });
+  inputElement.style.display = "none";
 }
 
-*/
-
-
-/*
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            // Success function
-            showPosition, 
-            // Error function
-            null, 
-            // Options. See MDN for details.
-            {
-               enableHighAccuracy: true,
-               timeout: 5000,
-               maximumAge: 0
-            });
-    } else { 
-        loc.innerHTML = "Your device does not support Geolocation";
-        alert("Your device does not support Geolocation")
-    }
-    
-    
-}
-
-function showPosition(position) {
-    loc.innerHTML="Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
-    return[position.coords.latitude, position.coords.longitude];
-  
-}
-*/

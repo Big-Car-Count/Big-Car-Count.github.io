@@ -26,16 +26,17 @@
 <body>
  
 
-<h1>The Big Car Count <image src="/images/icon_40.jpg" style="height:40px; width:40px;" alt="logo"></image></h1>
+<h1>The Big Car Count <image src="/images/icon_40.jpg" style="height:30px; width:30px;" alt="logo"></image></h1>
+<p><i>A survey of UK vehicles parked at home</i></p>
 <div class="mainbox">
 <div class="inst">
-<p>Enter a number plate</p>
+<p><b>Enter a number plate</b></p>
 </div>
 <div class="center">
 <input type="text" id="nplate" name="nplate" oninput="transformInput()" aria-label="Vehicle number plate"><br>
 </div>
 <div class="inst">
-<p>Where is this vehicle parked?</p>
+<p><b>Where is this vehicle parked?</b></p>
 </div>
 <div class ="buttonrow">
 <button onclick="submitPlate('drive')" class="image-button button-drive" aria-label="drive or garage"></button>
@@ -63,10 +64,8 @@
 <div class="overflowbox">
 <div class="mapbox">
 <div class="inst">
-<p><b>A crowd sourced survey of UK registered vehicles parked in their home location</b></p>
-<p>By participating you consent to the <a href="/about/consent">terms and conditions</a></p>
 <p><b>Current Location</b>:</p>
-<p id="location"><button onclick="updateCoords()" style="height: 40px"> Please share your location</button></p>
+<p id="location"><button onclick="shareCoords()" style="height: 40px"> Please share your location</button></p>
 </div>
 </div>
 <script src="/js/map.js"></script>
@@ -96,6 +95,20 @@
   <p>Doesn't look like a valid UK registation plate. Please check and re-enter. Or you may have found a foreign, diplomatic, or fake plate. We are not including these in our survey.</p>
   <p><button onclick="closeInvalidplate()" style="height: 40px">Re-enter number plate</button></p>
 </div>
+
+
+<div class="firsttime" id="firsttime">
+  <p><b>Thanks for making your first contribution</b></p>
+  <p>Before you begin please confirm:</p>
+  <ol>
+    <li>I accept the <a href="/about/consent">terms and conditions</a>.</li>
+    <li>I have read the  <a href="/about/">instructions</a>. </li>
+  </ol>
+  <br>
+  <p><button onclick="closefirsttime(true)" style="height:40px;width:100%">Yes, submit my observation</button></p>
+  <p><button onclick="closefirsttime(false)" style="height:40px;width:100%">No, let me read first</button></p>
+</div>
+
 
 </body>
 </html>

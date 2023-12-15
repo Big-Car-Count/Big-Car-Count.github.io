@@ -68,3 +68,11 @@ progressBar.innerHTML = '.';
 // Display starsMessage
 let messageDiv = document.getElementById('stars-message');
 messageDiv.innerHTML = starsMessage(stars)
+
+// Check if registered
+let registeredDiv = document.getElementById('registered');
+var reg = getCookie("registered");
+  
+if(reg === "true"){
+  registeredDiv.innerHTML = "<p><b>Your device is registered<b></p>"
+}
