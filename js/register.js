@@ -1,5 +1,7 @@
 function registerDevice(){
 
+  var form = document.getElementById("registerbutton");
+  form.innerHTML = '<image src="/images/spinner.svg" style="height:30px; width:30px;" alt="Checking">';
   
   var email = document.getElementById("email").value;
   var email2 = document.getElementById("email2").value;
@@ -43,8 +45,8 @@ function registerDevice(){
       setCookie("registered","true");
       closeregistration();
     } else {
-      console.log("Failed to submit ");
       console.log(data);
+      alert("Failed to submit ");
     }
   })
   
